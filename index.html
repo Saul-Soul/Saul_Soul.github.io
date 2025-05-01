@@ -20,6 +20,17 @@
             --header-bg: linear-gradient(135deg, #d6a74b, #e2bc6c);
             --feature-icon-color: #d6a74b;
             --button-hover: #ba8f3e;
+            /* 添加新的发光效果变量 */
+            --glow-opacity-weak: 0.1;
+            --glow-opacity-medium: 0.15;
+            --glow-opacity-strong: 0.25;
+            --card-glow: 0 5px 15px var(--shadow-color),
+                        0 0 30px rgba(214, 167, 75, 0.1);
+            --card-hover-glow: 0 8px 25px rgba(214, 167, 75, 0.12),
+                              0 0 40px rgba(214, 167, 75, 0.15);
+            --icon-glow: 0 0 15px rgba(214, 167, 75, 0.2);
+            --border-glow: rgba(214, 167, 75, 0.3);
+            --gradient-glow: rgba(214, 167, 75, 0.05);
         }
 
         [data-theme="dark"] {
@@ -31,12 +42,23 @@
             --gradient-end: #2196f3;
             --shadow-color: rgba(0, 0, 0, 0.3);
             --accent-color: #82b8f0;
-            --neon-glow: 0 0 15px rgba(100, 181, 246, 0.6);
+            --neon-glow: 0 0 15px rgba(100, 181, 246, 0.3);
             --card-bg: #111a24;
             --card-border: rgba(100, 181, 246, 0.15);
             --header-bg: linear-gradient(135deg, #3d8cd6, #1976d2);
             --feature-icon-color: #5ba4e5;
             --button-hover: #0d5ca7;
+            /* 暗色模式下的发光效果变量 */
+            --glow-opacity-weak: 0.08;
+            --glow-opacity-medium: 0.12;
+            --glow-opacity-strong: 0.2;
+            --card-glow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                        0 0 30px rgba(100, 181, 246, 0.1);
+            --card-hover-glow: 0 8px 25px rgba(0, 0, 0, 0.4),
+                              0 0 40px rgba(100, 181, 246, 0.15);
+            --icon-glow: 0 0 15px rgba(100, 181, 246, 0.2);
+            --border-glow: rgba(100, 181, 246, 0.3);
+            --gradient-glow: rgba(100, 181, 246, 0.05);
         }
 
         * {
@@ -83,7 +105,10 @@
             background-attachment: fixed;
             opacity: 1;
             transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
-            will-change: opacity;
+            will-change: opacity, background-image;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
         body::before {
@@ -96,13 +121,10 @@
         }
 
 
-        body.bg-fade-bg.bg-fade-to-dark::after {
-            opacity: 1;
-            background-image: url('https://img.picui.cn/free/2025/05/01/68124ef89740d.png');
-        }
+        body.bg-fade-bg.bg-fade-to-dark::after,
         body.bg-fade-bg.bg-fade-to-light::after {
             opacity: 1;
-            background-image: url('https://img.picui.cn/free/2025/05/01/681254deb9326.png');
+            transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
         }
 
         .container {
@@ -511,13 +533,13 @@
         }
 
         .feature-card {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-glow);
             border-radius: 12px;
             padding: 30px;
             text-align: center;
-            box-shadow: 0 5px 15px var(--shadow-color);
             transition: all 0.3s;
-            border: 1px solid rgba(214, 167, 75, 0.15);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -536,7 +558,11 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(transparent, rgba(var(--primary-color-rgb, 255, 180, 0), 0.05), transparent 30%);
+            background: conic-gradient(
+                transparent,
+                var(--gradient-glow),
+                transparent 30%
+            );
             animation: rotate 15s linear infinite;
             z-index: -1;
         }
@@ -546,16 +572,15 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px var(--shadow-color), 0 0 15px rgba(var(--primary-color-rgb, 255, 180, 0), 0.2);
-            border-color: rgba(214, 167, 75, 0.3);
+            border-color: var(--border-glow);
+            box-shadow: var(--card-hover-glow);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 20px;
             color: var(--feature-icon-color);
-            text-shadow: var(--neon-glow);
+            text-shadow: var(--icon-glow);
             display: inline-block;
             position: relative;
             width: 80px;
@@ -571,7 +596,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(var(--primary-color-rgb, 255, 180, 0), 0.05);
+            background: var(--gradient-glow);
+            box-shadow: var(--icon-glow);
             border-radius: 50%;
             z-index: -1;
             transform: scale(0.8);
@@ -580,7 +606,7 @@
 
         .feature-card:hover .feature-icon::before {
             transform: scale(1.1);
-            background: rgba(var(--primary-color-rgb, 255, 180, 0), 0.1);
+            background: var(--gradient-glow);
         }
 
         .feature-card h3 {
@@ -624,7 +650,7 @@
                 linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent),
                 linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
             background-size: 60px 60px;
-            opacity: 0.3;
+            opacity: var(--glow-opacity-weak);
         }
 
         .join-us::after {
@@ -634,7 +660,12 @@
             left: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, var(--primary-color), transparent, var(--primary-color));
+            background: linear-gradient(90deg,
+                var(--primary-color),
+                transparent,
+                var(--primary-color)
+            );
+            opacity: var(--glow-opacity-medium);
         }
 
         .join-us h2 {
@@ -835,7 +866,8 @@
             position: absolute;
             background: var(--primary-color);
             border-radius: 50%;
-            opacity: 0.18;
+            opacity: var(--glow-opacity-medium);
+            box-shadow: var(--icon-glow);
             animation: float 10s infinite linear;
         }
 
@@ -882,7 +914,100 @@
 
         /* 调整黑暗模式下的特性卡片背景色 */
         [data-theme="dark"] .feature-card {
+            background-color: rgba(17, 26, 36, 0.7);
+            border-color: rgba(100, 181, 246, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                       0 0 30px rgba(100, 181, 246, 0.1);
+        }
+
+        [data-theme="dark"] .feature-card:hover {
+            border-color: rgba(100, 181, 246, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+                       0 0 40px rgba(100, 181, 246, 0.15);
             background-color: rgba(17, 26, 36, 0.8);
+        }
+
+        [data-theme="dark"] .feature-card::before {
+            background: conic-gradient(
+                transparent,
+                rgba(100, 181, 246, 0.05),
+                transparent 30%
+            );
+        }
+
+        [data-theme="dark"] .feature-icon {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(100, 181, 246, 0.3);
+        }
+
+        [data-theme="dark"] .feature-icon::before {
+            background: rgba(100, 181, 246, 0.08);
+            box-shadow: 0 0 20px rgba(100, 181, 246, 0.1);
+        }
+
+        [data-theme="dark"] .feature-card.freedom {
+            background: linear-gradient(
+                to right,
+                var(--gradient-glow),
+                color-mix(in srgb, var(--gradient-glow) 200%, transparent),
+                var(--gradient-glow)
+            );
+            border-color: color-mix(in srgb, var(--border-glow) 70%, transparent);
+            box-shadow: var(--card-glow);
+        }
+
+        [data-theme="dark"] .feature-card.freedom:hover {
+            box-shadow: var(--card-hover-glow);
+        }
+
+        [data-theme="dark"] .feature-card.freedom .feature-icon {
+            box-shadow: var(--icon-glow);
+            border-color: var(--border-glow);
+        }
+
+        /* 暗色模式下的成员卡片调整 */
+        [data-theme="dark"] .member-avatar {
+            border-color: var(--primary-color);
+            box-shadow: var(--card-glow);
+        }
+
+        [data-theme="dark"] .member-name {
+            color: var(--primary-color);
+            text-shadow: var(--icon-glow);
+        }
+
+        [data-theme="dark"] .member-role {
+            color: rgba(224, 224, 224, 0.9);
+        }
+
+        [data-theme="dark"] .team-member:hover .member-avatar {
+            box-shadow: var(--card-hover-glow);
+        }
+
+        /* 暗色模式下的背景光效调整 */
+        [data-theme="dark"] .particles .particle {
+            background: var(--accent-color);
+            opacity: var(--glow-opacity-medium);
+            box-shadow: var(--icon-glow);
+        }
+
+        [data-theme="dark"] .section-title h2::before,
+        [data-theme="dark"] .section-title h2::after {
+            background: var(--primary-color);
+            box-shadow: var(--icon-glow);
+        }
+
+        [data-theme="dark"] .join-us::before {
+            opacity: var(--glow-opacity-weak);
+        }
+
+        [data-theme="dark"] .join-us::after {
+            background: linear-gradient(90deg,
+                var(--accent-color),
+                transparent,
+                var(--accent-color)
+            );
+            opacity: var(--glow-opacity-medium);
         }
 
         /* 自由度特色卡片独占一行的样式 */
@@ -1023,13 +1148,15 @@
             position: relative;
         }
 
+        /* 团队成员基础样式 */
         .team-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: clamp(10px, 2vw, 20px);
             margin: 20px auto;
-            max-width: 10000px;
+            max-width: 1000px;
+            padding: 0 clamp(10px, 3vw, 30px);
         }
 
         .team-member {
@@ -1037,67 +1164,96 @@
             flex-direction: column;
             align-items: center;
             transition: all 0.3s ease;
-            width: 100px;
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
+            width: clamp(70px, 10vw, 100px);
         }
 
         .member-avatar {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
             border-radius: 50%;
             overflow: hidden;
-            margin-bottom: 8px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 3px 10px var(--shadow-color);
+            margin-bottom: clamp(5px, 1vw, 8px);
+            border: clamp(1px, 0.3vw, 2px) solid var(--primary-color);
+            box-shadow: var(--card-glow);
+        }
+
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .member-info {
             text-align: center;
-            margin-top: 5px;
+            margin-top: clamp(3px, 1vw, 5px);
             transition: transform 0.3s;
+            width: 100%;
         }
 
         .member-name {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
             font-weight: bold;
             color: var(--primary-color);
-            margin-bottom: 2px;
+            margin-bottom: clamp(2px, 0.5vw, 3px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .member-role {
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 1.2vw, 0.7rem);
             color: var(--text-color);
             opacity: 0.8;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        [data-theme="dark"] .member-name {
-            color: var(--accent-color);
+        /* 悬浮效果 */
+        @media (hover: hover) {
+            .team-member:hover {
+                transform: translateY(clamp(-5px, -1vw, -3px));
+            }
+
+            .team-member:hover .member-info {
+                transform: scale(1.05);
+            }
         }
 
-        [data-theme="dark"] .member-role {
-            color: rgba(224, 224, 224, 0.9);
+        /* 触摸设备的效果 */
+        @media (hover: none) {
+            .team-member:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* 确保在极小屏幕上仍然保持最小可读性 */
+        @media (max-width: 320px) {
+            .team-grid {
+                gap: 8px;
+            }
+            
+            .team-member {
+                width: 60px;
+            }
+
+            .member-name {
+                font-size: 0.65rem;
+            }
+
+            .member-role {
+                font-size: 0.55rem;
+            }
         }
 
         .team-member:hover .member-info {
             transform: scale(1.05);
         }
 
-        @media (max-width: 576px) {
-            .team-grid {
-                gap: 10px;
-            }
-            
-            .team-member {
-                width: 70px;
-            }
-            
-            .member-avatar {
-                width: 50px;
-                height: 50px;
-            }
+        .team-member:active {
+            transform: scale(0.95);
         }
 
         /* 取消所有链接的下划线 */
@@ -1328,6 +1484,68 @@
             100% {
                 transform: scale(2);
                 opacity: 0;
+            }
+        }
+
+        /* 调整团队成员在移动端的显示 */
+        @media (max-width: 576px) {
+            .team-grid {
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .team-member {
+                width: 80px; /* 调整为更合适的宽度 */
+            }
+            
+            .member-avatar {
+                width: 80px; /* 与容器宽度一致 */
+                height: 80px;
+                border-width: 1.5px; /* 减小边框宽度 */
+            }
+
+            .member-info {
+                transform: none; /* 移除默认的变换效果 */
+                margin-top: 8px;
+            }
+
+            .member-name {
+                font-size: 0.8rem;
+                margin-bottom: 3px;
+            }
+
+            .member-role {
+                font-size: 0.65rem;
+                line-height: 1.2;
+            }
+
+            /* 优化移动端的悬浮效果 */
+            .team-member:hover {
+                transform: translateY(-3px);
+            }
+
+            .team-member:hover .member-info {
+                transform: none;
+            }
+
+            .team-member:active {
+                transform: translateY(0);
+            }
+        }
+
+        /* 添加中等屏幕的响应式样式 */
+        @media (min-width: 577px) and (max-width: 768px) {
+            .team-grid {
+                gap: 20px;
+            }
+            
+            .team-member {
+                width: 90px;
+            }
+            
+            .member-avatar {
+                width: 90px;
+                height: 90px;
             }
         }
     </style>
@@ -1574,8 +1792,29 @@
     <script>
         // 初始化 Lenis
         const lenis = new Lenis({
-            autoRaf: true,
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
         });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // 将滚动事件监听器绑定到Lenis
+        lenis.on('scroll', throttle(function(e) {
+            handleScroll();
+            parallaxTitleEffect();
+            updateParallaxTarget();
+            animateOnScroll();
+        }, 100));
 
         // 替换锚点平滑滚动为 Lenis
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1585,10 +1824,11 @@
                 if (target) {
                     lenis.scrollTo(target, {
                         offset: -20,
-                        duration: 1.2
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
                     });
                 }
-                // ...激活导航代码...
+                // 激活导航
                 document.querySelectorAll('nav a').forEach(navLink => {
                     navLink.classList.remove('active');
                 });
@@ -1931,41 +2171,55 @@
 
         // 主题切换时调用
         function switchTheme(toDark) {
+            // 防止快速切换
+            if (document.body.classList.contains('bg-fade-bg')) {
+                return;
+            }
+
             // 1. 标记切换中
             document.body.classList.add('bg-fade-bg');
             document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
+
             // 2. 预加载新图片
             const newUrl = toDark
                 ? 'https://img.picui.cn/free/2025/05/01/68124ef89740d.png'
                 : 'https://img.picui.cn/free/2025/05/01/681254deb9326.png';
-            preloadImage(newUrl, function() {
+
+            const img = new Image();
+            img.onload = function() {
                 // 3. 让after伪元素淡入
-                document.body.classList.add(toDark ? 'bg-fade-to-dark' : 'bg-fade-to-light');
-                setTimeout(function() {
-                    // 4. 切换主题
-                    if (toDark) {
-                        document.documentElement.setAttribute('data-theme', 'dark');
-                        localStorage.setItem('theme', 'dark');
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                    } else {
-                        document.documentElement.removeAttribute('data-theme');
-                        localStorage.setItem('theme', 'light');
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
-                    }
-                    // 5. 切换before为新图片，after淡出
+                requestAnimationFrame(() => {
+                    document.body.classList.add(toDark ? 'bg-fade-to-dark' : 'bg-fade-to-light');
+                    
                     setTimeout(function() {
-                        document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
-                        // 动态切换before的图片
-                        document.body.style.setProperty('--main-bg', `url('${newUrl}')`);
-                        // 6. 结束切换
+                        // 4. 切换主题
+                        if (toDark) {
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                            localStorage.setItem('theme', 'dark');
+                            icon.classList.remove('fa-moon');
+                            icon.classList.add('fa-sun');
+                        } else {
+                            document.documentElement.removeAttribute('data-theme');
+                            localStorage.setItem('theme', 'light');
+                            icon.classList.remove('fa-sun');
+                            icon.classList.add('fa-moon');
+                        }
+
+                        // 5. 切换before为新图片，after淡出
                         setTimeout(function() {
-                            document.body.classList.remove('bg-fade-bg');
-                        }, 100);
-                    }, 800); // 与CSS的transition一致
-                }, 20);
-            });
+                            document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
+                            // 动态切换before的图片
+                            document.body.style.setProperty('--main-bg', `url('${newUrl}')`);
+                            
+                            // 6. 结束切换
+                            setTimeout(function() {
+                                document.body.classList.remove('bg-fade-bg');
+                            }, 100);
+                        }, 800);
+                    }, 50);
+                });
+            };
+            img.src = newUrl;
         }
 
         // 页面初始化时设置before的图片
