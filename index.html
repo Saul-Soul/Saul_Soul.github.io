@@ -120,11 +120,27 @@
             background-image: none;
         }
 
-
-        body.bg-fade-bg.bg-fade-to-dark::after,
+        body.bg-fade-bg.bg-fade-to-dark::after {
+            opacity: 1;
+            background-image: url('https://img.picui.cn/free/2025/05/01/68124ef89740d.png');
+        }
         body.bg-fade-bg.bg-fade-to-light::after {
             opacity: 1;
-            transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
+            background-image: url('https://img.picui.cn/free/2025/05/01/681254deb9326.png');
+        }
+
+        /* 背景过渡增强 */
+        body.bg-fade-bg {
+            position: relative;
+        }
+
+        body.bg-fade-bg::before {
+            transition: opacity 0.8s cubic-bezier(.22,1,.36,1), background-image 0s linear 0.8s;
+        }
+
+        /* 特殊处理图片背景的黑暗模式 */
+        [data-theme="dark"] body::before {
+            filter: brightness(0.7) saturate(0.8) contrast(1.2);
         }
 
         .container {
@@ -1548,6 +1564,327 @@
                 height: 90px;
             }
         }
+
+        // 修复的preloadImage函数，作为备用
+        function preloadImage(url, callback) {
+            const img = new Image();
+            img.onload = callback;
+            img.onerror = callback; // 即使加载失败也继续执行
+            img.src = url;
+        }
+
+        .server-status-card {
+            margin-top: 30px;
+            background: linear-gradient(to right, rgba(var(--primary-color-rgb, 255, 180, 0), 0.05), rgba(var(--primary-color-rgb, 255, 180, 0), 0.1), rgba(var(--primary-color-rgb, 255, 180, 0), 0.05));
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        [data-theme="dark"] .server-status-card {
+            background: linear-gradient(to right, rgba(var(--primary-color-rgb, 100, 181, 246), 0.05), rgba(var(--primary-color-rgb, 100, 181, 246), 0.1), rgba(var(--primary-color-rgb, 100, 181, 246), 0.05));
+        }
+        
+        .server-status-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .server-status-item {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .status-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .status-value {
+            padding: 8px 15px;
+            background-color: rgba(var(--primary-color-rgb, 255, 180, 0), 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(var(--primary-color-rgb, 255, 180, 0), 0.15);
+        }
+        
+        [data-theme="dark"] .status-value {
+            background-color: rgba(17, 26, 36, 0.7);
+            border-color: rgba(var(--primary-color-rgb, 100, 181, 246), 0.15);
+        }
+        
+        .server-offline {
+            color: #ff5252;
+        }
+        
+        .server-online {
+            color: #4caf50;
+        }
+        
+        @media (min-width: 768px) {
+            .server-status-item {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .status-label {
+                margin-bottom: 0;
+                margin-right: 10px;
+                width: 120px;
+            }
+            
+            .status-value {
+                flex: 1;
+            }
+        }
+
+        /* 修改状态标签和标题的上下顺序 */
+        .server-title-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px; /* 减少下边距 */
+            width: 100%;
+            padding-top: 0; /* 移除上边距 */
+        }
+
+        .server-title-container h3 {
+            margin: 0 0 10px 0; /* 添加底部边距 */
+            text-align: center;
+            position: relative;
+        }
+
+        .status-badge {
+            position: static; /* 不再使用绝对定位 */
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background-color: rgba(var(--primary-color-rgb, 255, 180, 0), 0.1);
+            border: 1px solid rgba(var(--primary-color-rgb, 255, 180, 0), 0.15);
+            white-space: nowrap;
+            font-weight: 500;
+            margin-top: 5px; /* 添加顶部边距 */
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 576px) {
+            .server-title-container {
+                margin-bottom: 15px;
+            }
+            
+            .server-title-container h3 {
+                margin-bottom: 8px;
+            }
+            
+            .status-badge {
+                margin-top: 3px;
+            }
+        }
+
+        /* 调整服务器卡片容器为横向排列 */
+        .server-cards-container {
+            display: flex;
+            flex-direction: row; /* 强制横向排列 */
+            justify-content: space-between; /* 两端对齐 */
+            gap: 30px; /* 卡片之间的间距 */
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* 修改服务器卡片样式 */
+        .server-status-card {
+            margin: 0;
+            width: calc(50% - 15px); /* 每个卡片占据一半宽度减去间距的一半 */
+            min-width: initial; /* 移除最小宽度限制 */
+            max-width: initial; /* 移除最大宽度限制 */
+            display: flex;
+            flex-direction: column;
+            padding: 30px 25px;
+            min-height: 200px;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            flex-grow: 0; /* 防止卡片伸展 */
+            flex-shrink: 0; /* 防止卡片收缩 */
+        }
+
+        .server-status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--card-hover-glow);
+        }
+
+        /* 较小屏幕上的响应式调整 */
+        @media (max-width: 768px) {
+            .server-cards-container {
+                flex-direction: column; /* 小屏幕上转为纵向 */
+                align-items: center;
+            }
+            
+            .server-status-card {
+                width: 100%; /* 小屏幕上占满宽度 */
+                margin-bottom: 20px;
+            }
+        }
+
+        /* 复制IP按钮样式 */
+        .ip-button {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(var(--primary-color-rgb, 255, 180, 0), 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .ip-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--primary-color-rgb, 255, 180, 0), 0.3);
+        }
+
+        .ip-button:active {
+            transform: translateY(0);
+        }
+
+        [data-theme="dark"] .ip-button {
+            box-shadow: 0 3px 8px rgba(var(--primary-color-rgb, 100, 181, 246), 0.2);
+        }
+
+        [data-theme="dark"] .ip-button:hover {
+            box-shadow: 0 5px 15px rgba(var(--primary-color-rgb, 100, 181, 246), 0.3);
+        }
+
+        /* 禁用按钮样式 */
+        .ip-button.disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .ip-button.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .ip-button.disabled {
+            background: #455a64;
+        }
+
+        /* 复制成功提示 */
+        .server-action {
+            position: relative;
+            width: 100%;
+        }
+
+        .copy-alert {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .copy-alert.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .copy-alert::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.8);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .server-cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .server-status-card {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* 全局复制成功弹窗 */
+        .global-copy-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(.22,1,.36,1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .global-copy-alert.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        [data-theme="dark"] .global-copy-alert {
+            background: rgba(30, 30, 30, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 创建一个图标包装器 */
+        .global-copy-alert .alert-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        /* 媒体查询适配小屏幕 */
+        @media (max-width: 576px) {
+            .global-copy-alert {
+                width: 90%;
+                max-width: 300px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
@@ -1701,6 +2038,43 @@
                 <p>MCPOOL是一个以公益为理念的我的世界服务器，我们致力于为玩家提供更高的自由度，更棒的游戏体验。<br>服务器采用离线登录，极高的生电支持，最全的插件功能。</p>
                 <p>无论你是红石大神、建筑达人，还是刚刚接触Minecraft的新手，在MCPOOL，都能找到属于自己的乐趣。</p>
             </div>
+            
+            <!-- 服务器卡片容器 -->
+            <div class="server-cards-container">
+                <!-- MCPOOL主服卡片 -->
+                <div class="feature-card server-status-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="server-title-container">
+                        <h3>MCPOOL主服</h3>
+                        <span id="server-ping" class="status-badge">加载中...</span>
+                    </div>
+                    <div class="server-action">
+                        <button id="copy-ip-btn" class="ip-button">
+                            <i class="fas fa-copy"></i> 复制IP
+                        </button>
+                        <div id="copy-alert" class="copy-alert">复制成功！</div>
+                    </div>
+                </div>
+                
+                <!-- 模组服卡片 -->
+                <div class="feature-card server-status-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="server-title-container">
+                        <h3>模组服</h3>
+                        <span id="server-ping-mod" class="status-badge">加载中...</span>
+                    </div>
+                    <div class="server-action">
+                        <button id="copy-ip-mod-btn" class="ip-button">
+                            <i class="fas fa-copy"></i> 复制IP
+                        </button>
+                        <div id="copy-alert-mod" class="copy-alert">复制成功！</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1788,6 +2162,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- 全局复制成功弹窗 -->
+    <div id="global-copy-alert" class="global-copy-alert">
+        <span class="alert-icon"><i class="fas fa-check-circle"></i></span>
+        <span id="global-copy-message">IP已复制到剪贴板</span>
+    </div>
 
     <script>
         // 初始化 Lenis
@@ -2179,60 +2559,245 @@
             // 1. 标记切换中
             document.body.classList.add('bg-fade-bg');
             document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
-
-            // 2. 预加载新图片
+            
+            // 添加背景过渡样式
+            addBackgroundTransitionStyles();
+            
+            // 2. 提前预加载背景图片
             const newUrl = toDark
                 ? 'https://img.picui.cn/free/2025/05/01/68124ef89740d.png'
                 : 'https://img.picui.cn/free/2025/05/01/681254deb9326.png';
 
-            const img = new Image();
-            img.onload = function() {
-                // 3. 让after伪元素淡入
+            // 立即开始预加载新背景图片
+            preloadImage(newUrl, function() {
+                // 3. 先让after元素做淡入效果
                 requestAnimationFrame(() => {
+                    // 立即应用主题切换
+                    if (toDark) {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                    
+                    // 重要：立即应用滤镜效果
+                    if (toDark) {
+                        document.body.style.setProperty('--bg-filter', 'brightness(0.7) saturate(0.8) contrast(1.2)');
+                    } else {
+                        document.body.style.setProperty('--bg-filter', 'none');
+                    }
+                    
+                    // 启动背景淡入效果
                     document.body.classList.add(toDark ? 'bg-fade-to-dark' : 'bg-fade-to-light');
                     
+                    // 4. 过渡完成后更新底层背景
                     setTimeout(function() {
-                        // 4. 切换主题
-                        if (toDark) {
-                            document.documentElement.setAttribute('data-theme', 'dark');
-                            localStorage.setItem('theme', 'dark');
-                            icon.classList.remove('fa-moon');
-                            icon.classList.add('fa-sun');
-                        } else {
-                            document.documentElement.removeAttribute('data-theme');
-                            localStorage.setItem('theme', 'light');
-                            icon.classList.remove('fa-sun');
-                            icon.classList.add('fa-moon');
-                        }
-
-                        // 5. 切换before为新图片，after淡出
+                        // 更新底层背景
+                        document.body.style.setProperty('--main-bg', `url('${newUrl}')`);
+                        
+                        // 5. 过渡完成后清理状态
                         setTimeout(function() {
-                            document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
-                            // 动态切换before的图片
-                            document.body.style.setProperty('--main-bg', `url('${newUrl}')`);
-                            
-                            // 6. 结束切换
-                            setTimeout(function() {
-                                document.body.classList.remove('bg-fade-bg');
-                            }, 100);
-                        }, 800);
-                    }, 50);
+                            document.body.classList.remove('bg-fade-bg', 'bg-fade-to-dark', 'bg-fade-to-light');
+                            updateRootColors();
+                        }, 100);
+                    }, 800);
                 });
-            };
-            img.src = newUrl;
+            });
         }
 
-        // 页面初始化时设置before的图片
-        document.body.style.setProperty('--main-bg', "url('https://img.picui.cn/free/2025/05/01/681254deb9326.png')");
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.style.setProperty('--main-bg', "url('https://img.picui.cn/free/2025/05/01/68124ef89740d.png')");
+        // 动态添加背景转换样式
+        function addBackgroundTransitionStyles() {
+            const styleId = 'theme-background-transition-styles';
+            // 如果已存在则移除
+            if (document.getElementById(styleId)) {
+                document.getElementById(styleId).remove();
+            }
+
+            const style = document.createElement('style');
+            style.id = styleId;
+            style.textContent = `
+                body.bg-fade-bg {
+                    position: relative;
+                }
+                body.bg-fade-bg::before {
+                    transition: opacity 0.8s cubic-bezier(.22,1,.36,1), filter 0.3s ease-out !important;
+                    filter: var(--bg-filter, none) !important;
+                }
+                body.bg-fade-bg.bg-fade-to-dark::after {
+                    opacity: 1;
+                    background-image: url('https://img.picui.cn/free/2025/05/01/68124ef89740d.png');
+                    filter: brightness(0.7) saturate(0.8) contrast(1.2);
+                }
+                body.bg-fade-bg.bg-fade-to-light::after {
+                    opacity: 1;
+                    background-image: url('https://img.picui.cn/free/2025/05/01/681254deb9326.png');
+                    filter: none;
+                }
+            `;
+            document.head.appendChild(style);
         }
 
         function preloadImage(url, callback) {
-            const img = new window.Image();
-            img.onload = callback;
+            const img = new Image();
+            let called = false;
+            
+            // 成功加载
+            img.onload = function() {
+                if (!called) {
+                    called = true;
+                    clearTimeout(timeout);
+                    callback();
+                }
+            };
+            
+            // 加载失败也调用回调，保证主题能正常切换
+            img.onerror = function() {
+                console.warn('背景图片加载失败:', url);
+                if (!called) {
+                    called = true;
+                    clearTimeout(timeout);
+                    callback();
+                }
+            };
+            
+            // 添加加载超时处理
+            const timeout = setTimeout(function() {
+                console.warn('背景图片加载超时:', url);
+                if (!called) {
+                    called = true;
+                    callback();
+                }
+            }, 3000); // 3秒超时
+            
             img.src = url;
         }
+
+        // 添加到现有JavaScript末尾
+        // 获取服务器状态
+        function fetchServerStatus() {
+            fetch('https://list.mczfw.cn/api/mcpool.net')
+                .then(response => response.json())
+                .then(data => {
+                    const pingElement = document.getElementById('server-ping');
+                    const motdElement = document.getElementById('server-motd');
+                    
+                    // 清除之前的类
+                    pingElement.classList.remove('server-offline', 'server-online');
+                    
+                    // 处理ping数据
+                    if (data.ping === null) {
+                        pingElement.textContent = '离线';
+                        pingElement.classList.add('server-offline');
+                    } else {
+                        pingElement.textContent = `在线 ${data.p}人`;
+                        pingElement.classList.add('server-online');
+                    }
+                })
+                .catch(error => {
+                    console.error('获取服务器状态失败:', error);
+                    const pingElement = document.getElementById('server-ping');
+                    pingElement.textContent = '获取失败';
+                    pingElement.classList.add('server-offline');
+                });
+        }
+    
+            // 添加模组服状态获取函数
+        function fetchModServerStatus() {
+            fetch('https://list.mczfw.cn/api/mod.mcpool.net')
+                .then(response => response.json())
+                .then(data => {
+                    const pingElement = document.getElementById('server-ping-mod');
+                    
+                    // 清除之前的类
+                    pingElement.classList.remove('server-offline', 'server-online');
+                    
+                    // 处理ping数据
+                    if (data.ping === null) {
+                        pingElement.textContent = '离线';
+                        pingElement.classList.add('server-offline');
+                    } else {
+                        pingElement.textContent = `在线 ${data.p}人`;
+                        pingElement.classList.add('server-online');
+                    }
+                })
+                .catch(error => {
+                    console.error('获取模组服状态失败:', error);
+                    const pingElement = document.getElementById('server-ping-mod');
+                    pingElement.textContent = '获取失败';
+                    pingElement.classList.add('server-offline');
+                });
+        }
+        
+        // 页面加载后获取服务器状态
+        window.addEventListener('DOMContentLoaded', function() {
+            fetchServerStatus()
+            fetchModServerStatus();
+            
+            // 设置定时刷新服务器状态（每60秒）
+            setInterval(fetchServerStatus, 60000);
+        });
+
+        // 复制IP功能增强
+        document.addEventListener('DOMContentLoaded', function() {
+            // 主服IP按钮
+            const copyButton = document.getElementById('copy-ip-btn');
+            // 模组服IP按钮
+            const copyModButton = document.getElementById('copy-ip-mod-btn');
+            // 全局弹窗
+            const globalCopyAlert = document.getElementById('global-copy-alert');
+            const globalCopyMessage = document.getElementById('global-copy-message');
+            
+            // 创建通用复制函数
+            function copyToClipboard(text, sourceType) {
+                // 创建一个临时textarea元素用于复制
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';  // 避免滚动页面
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                
+                try {
+                    // 尝试复制文本
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        // 设置消息内容
+                        globalCopyMessage.textContent = `${text} 已复制到剪贴板`;
+                        // 显示全局弹窗
+                        globalCopyAlert.classList.add('show');
+                        
+                        // 3秒后隐藏弹窗
+                        setTimeout(() => {
+                            globalCopyAlert.classList.remove('show');
+                        }, 2000);
+                    }
+                } catch (err) {
+                    console.error('复制失败:', err);
+                }
+                
+                // 移除临时元素
+                document.body.removeChild(textarea);
+            }
+            
+            // 为MCPOOL主服添加复制功能
+            if (copyButton) {
+                copyButton.addEventListener('click', function() {
+                    copyToClipboard('mcpool.net', 'main');
+                });
+            }
+            
+            // 为模组服添加复制功能
+            if (copyModButton) {
+                copyModButton.addEventListener('click', function() {
+                    copyToClipboard('mod.mcpool.net', 'mod');
+                });
+            }
+        });
     </script>
 </body>
 </html>
