@@ -9,7 +9,7 @@
     <style>
         :root {
             --primary-color: #d6a74b;
-            
+
             --secondary-color: #ffffff;
             --text-color: #595959;
             --bg-color: #fffdf8;
@@ -2738,11 +2738,12 @@
         
         // 页面加载后获取服务器状态
         window.addEventListener('DOMContentLoaded', function() {
-            fetchServerStatus()
+            fetchServerStatus();
             fetchModServerStatus();
             
             // 设置定时刷新服务器状态（每60秒）
-            setInterval(fetchServerStatus, 60000);
+            setInterval(fetchServerStatus, 10000);
+            setInterval(fetchModServerStatus, 10000)
         });
 
         // 复制IP功能增强
