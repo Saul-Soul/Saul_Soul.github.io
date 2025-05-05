@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCPOOL - 我的世界公益服务器</title>
-    <link rel="icon" href="https://static.wikia.nocookie.net/minecraft_zh_gamepedia/images/7/75/Wheat_JE2_BE2.png/revision/latest?cb=20190424114455" type="image/png">
-    <link rel="shortcut icon" href="https://static.wikia.nocookie.net/minecraft_zh_gamepedia/images/7/75/Wheat_JE2_BE2.png/revision/latest?cb=20190424114455" type="image/png">
+    <link rel="icon"
+        href="https://static.wikia.nocookie.net/minecraft_zh_gamepedia/images/7/75/Wheat_JE2_BE2.png/revision/latest?cb=20190424114455"
+        type="image/png">
+    <link rel="shortcut icon"
+        href="https://static.wikia.nocookie.net/minecraft_zh_gamepedia/images/7/75/Wheat_JE2_BE2.png/revision/latest?cb=20190424114455"
+        type="image/png">
     <style>
         :root {
             --primary-color: #d6a74b;
@@ -28,9 +33,9 @@
             --glow-opacity-medium: 0.15;
             --glow-opacity-strong: 0.25;
             --card-glow: 0 5px 15px var(--shadow-color),
-                        0 0 30px rgba(214, 167, 75, 0.1);
+                0 0 30px rgba(214, 167, 75, 0.1);
             --card-hover-glow: 0 8px 25px rgba(214, 167, 75, 0.12),
-                              0 0 40px rgba(214, 167, 75, 0.15);
+                0 0 40px rgba(214, 167, 75, 0.15);
             --icon-glow: 0 0 15px rgba(214, 167, 75, 0.2);
             --border-glow: rgba(214, 167, 75, 0.3);
             --gradient-glow: rgba(214, 167, 75, 0.05);
@@ -56,9 +61,9 @@
             --glow-opacity-medium: 0.12;
             --glow-opacity-strong: 0.2;
             --card-glow: 0 5px 15px rgba(0, 0, 0, 0.3),
-                        0 0 30px rgba(100, 181, 246, 0.1);
+                0 0 30px rgba(100, 181, 246, 0.1);
             --card-hover-glow: 0 8px 25px rgba(0, 0, 0, 0.4),
-                              0 0 40px rgba(100, 181, 246, 0.15);
+                0 0 40px rgba(100, 181, 246, 0.15);
             --icon-glow: 0 0 15px rgba(100, 181, 246, 0.2);
             --border-glow: rgba(100, 181, 246, 0.3);
             --gradient-glow: rgba(100, 181, 246, 0.05);
@@ -73,7 +78,7 @@
                 color 0.3s,
                 box-shadow 0.3s,
                 border-color 0.3s,
-                background-image 0.8s cubic-bezier(.22,1,.36,1),
+                background-image 0.8s cubic-bezier(.22, 1, .36, 1),
                 filter 0.3s,
                 transform 0.3s;
         }
@@ -107,7 +112,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             opacity: 1;
-            transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
+            transition: opacity 0.8s cubic-bezier(.22, 1, .36, 1);
             will-change: opacity, background-image;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -127,6 +132,7 @@
             opacity: 1;
             background-image: url('https://img.picui.cn/free/2025/05/01/68124ef89740d.png');
         }
+
         body.bg-fade-bg.bg-fade-to-light::after {
             opacity: 1;
             background-image: url('https://img.picui.cn/free/2025/05/01/681254deb9326.png');
@@ -138,7 +144,7 @@
         }
 
         body.bg-fade-bg::before {
-            transition: opacity 0.8s cubic-bezier(.22,1,.36,1), background-image 0s linear 0.8s;
+            transition: opacity 0.8s cubic-bezier(.22, 1, .36, 1), background-image 0s linear 0.8s;
         }
 
         /* 特殊处理图片背景的黑暗模式 */
@@ -167,7 +173,7 @@
             backface-visibility: hidden;
             opacity: 0;
             transform: translateY(-20px);
-            transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+            transition: opacity 0.7s cubic-bezier(.22, 1, .36, 1), transform 0.7s cubic-bezier(.22, 1, .36, 1);
         }
 
         header.header-fadein {
@@ -395,8 +401,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
@@ -497,7 +510,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(var(--primary-color-rgb, 255, 180, 0), 0.03) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(var(--gradient-end-rgb, 255, 144, 0), 0.03) 0%, transparent 20%);
             pointer-events: none;
@@ -577,17 +590,17 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(
-                transparent,
-                var(--gradient-glow),
-                transparent 30%
-            );
+            background: conic-gradient(transparent,
+                    var(--gradient-glow),
+                    transparent 30%);
             animation: rotate 15s linear infinite;
             z-index: -1;
         }
 
         @keyframes rotate {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .feature-card:hover {
@@ -665,7 +678,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent),
                 linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
             background-size: 60px 60px;
@@ -680,10 +693,9 @@
             width: 100%;
             height: 6px;
             background: linear-gradient(90deg,
-                var(--primary-color),
-                transparent,
-                var(--primary-color)
-            );
+                    var(--primary-color),
+                    transparent,
+                    var(--primary-color));
             opacity: var(--glow-opacity-medium);
         }
 
@@ -758,7 +770,7 @@
             .join-container {
                 flex-direction: column;
             }
-            
+
             .server-info,
             .join-us .btn {
                 width: 100%;
@@ -849,23 +861,23 @@
                 justify-content: center;
                 gap: 10px;
             }
-            
+
             .logo {
                 margin-bottom: 10px;
             }
-            
+
             nav ul {
                 order: 3;
                 width: 100%;
                 justify-content: center;
                 padding: 8px;
             }
-            
+
             .theme-toggle {
                 order: 2;
                 margin: 0;
             }
-            
+
             body {
                 padding-top: 140px;
             }
@@ -894,6 +906,7 @@
             0% {
                 transform: translateY(0) rotate(0deg);
             }
+
             100% {
                 transform: translateY(-100vh) rotate(540deg);
             }
@@ -916,13 +929,14 @@
         }
 
         @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+
             .logo,
             nav ul,
             .theme-toggle {
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
             }
-            
+
             [data-theme="dark"] .logo,
             [data-theme="dark"] nav ul,
             [data-theme="dark"] .theme-toggle {
@@ -936,22 +950,20 @@
             background-color: rgba(17, 26, 36, 0.7);
             border-color: rgba(100, 181, 246, 0.15);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
-                       0 0 30px rgba(100, 181, 246, 0.1);
+                0 0 30px rgba(100, 181, 246, 0.1);
         }
 
         [data-theme="dark"] .feature-card:hover {
             border-color: rgba(100, 181, 246, 0.3);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
-                       0 0 40px rgba(100, 181, 246, 0.15);
+                0 0 40px rgba(100, 181, 246, 0.15);
             background-color: rgba(17, 26, 36, 0.8);
         }
 
         [data-theme="dark"] .feature-card::before {
-            background: conic-gradient(
-                transparent,
-                rgba(100, 181, 246, 0.05),
-                transparent 30%
-            );
+            background: conic-gradient(transparent,
+                    rgba(100, 181, 246, 0.05),
+                    transparent 30%);
         }
 
         [data-theme="dark"] .feature-icon {
@@ -965,12 +977,10 @@
         }
 
         [data-theme="dark"] .feature-card.freedom {
-            background: linear-gradient(
-                to right,
-                var(--gradient-glow),
-                color-mix(in srgb, var(--gradient-glow) 200%, transparent),
-                var(--gradient-glow)
-            );
+            background: linear-gradient(to right,
+                    var(--gradient-glow),
+                    color-mix(in srgb, var(--gradient-glow) 200%, transparent),
+                    var(--gradient-glow));
             border-color: color-mix(in srgb, var(--border-glow) 70%, transparent);
             box-shadow: var(--card-glow);
         }
@@ -1022,17 +1032,17 @@
 
         [data-theme="dark"] .join-us::after {
             background: linear-gradient(90deg,
-                var(--accent-color),
-                transparent,
-                var(--accent-color)
-            );
+                    var(--accent-color),
+                    transparent,
+                    var(--accent-color));
             opacity: var(--glow-opacity-medium);
         }
 
         /* 自由度特色卡片独占一行的样式 */
         .feature-card.freedom {
             border-color: rgba(var(--primary-color-rgb, 255, 180, 0), 0.25);
-            grid-column: 1 / -1; /* 横跨所有列 */
+            grid-column: 1 / -1;
+            /* 横跨所有列 */
             max-width: 100%;
             background: linear-gradient(to right, rgba(var(--primary-color-rgb, 255, 180, 0), 0.05), rgba(var(--primary-color-rgb, 255, 180, 0), 0.1), rgba(var(--primary-color-rgb, 255, 180, 0), 0.05));
             padding: 40px 30px;
@@ -1087,20 +1097,20 @@
                 text-align: center;
                 padding: 30px 20px;
             }
-            
+
             .feature-card.freedom .feature-icon {
                 margin: 0 auto 20px;
             }
-            
+
             .feature-card.freedom h3 {
                 text-align: center;
             }
-            
+
             .feature-card.freedom h3::after {
                 left: 50%;
                 transform: translateX(-50%);
             }
-            
+
             .feature-card.freedom p {
                 text-align: center;
             }
@@ -1253,7 +1263,7 @@
             .team-grid {
                 gap: 8px;
             }
-            
+
             .team-member {
                 width: 60px;
             }
@@ -1277,7 +1287,8 @@
 
         /* 取消所有链接的下划线 */
         a {
-            text-decoration: none; /* 取消下划线 */
+            text-decoration: none;
+            /* 取消下划线 */
         }
 
         .player-list {
@@ -1289,14 +1300,19 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px; /* 控制头像之间的间距 */
+            gap: 10px;
+            /* 控制头像之间的间距 */
         }
 
         .player-avatar {
-            width: 50px; /* 头像宽度 */
-            height: 50px; /* 头像高度 */
-            border-radius: 50%; /* 圆形头像 */
-            border: 2px solid var(--primary-color); /* 边框颜色 */
+            width: 50px;
+            /* 头像宽度 */
+            height: 50px;
+            /* 头像高度 */
+            border-radius: 50%;
+            /* 圆形头像 */
+            border: 2px solid var(--primary-color);
+            /* 边框颜色 */
         }
 
         /* 头像悬浮气泡提示 */
@@ -1311,7 +1327,8 @@
             left: 50%;
             bottom: 110%;
             transform: translateX(-50%) translateY(5px);
-            background: rgba(255, 255, 255, 0.247); /* 更淡的背景色 */
+            background: rgba(255, 255, 255, 0.247);
+            /* 更淡的背景色 */
             color: #fff;
             padding: 4px 12px;
             border-radius: 6px;
@@ -1321,9 +1338,12 @@
             pointer-events: none;
             transition: all 0.2s;
             z-index: 10;
-            backdrop-filter: blur(8px);           /* 毛玻璃效果 */
-            -webkit-backdrop-filter: blur(8px);   /* 兼容Safari/Chrome */
-            border: 1px solid rgba(255,255,255,0.15); /* 可选：加一层淡白边框更像毛玻璃 */
+            backdrop-filter: blur(8px);
+            /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(8px);
+            /* 兼容Safari/Chrome */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* 可选：加一层淡白边框更像毛玻璃 */
         }
 
         .player-tooltip:hover::before {
@@ -1338,7 +1358,7 @@
 
         .player-tooltip:hover .player-avatar {
             transform: scale(1.15) rotate(-3deg);
-            box-shadow: 0 4px 16px rgba(214,167,75,0.25);
+            box-shadow: 0 4px 16px rgba(214, 167, 75, 0.25);
             z-index: 2;
         }
 
@@ -1375,23 +1395,23 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            text-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
             will-change: transform, opacity;
             opacity: 0;
-            transform: translateX(200px) scale(1.2);
+            /* transform: translateX(200px) scale(1.2); */ /* <- 移除此行 */
             transition: none;
             pointer-events: auto;
         }
 
         body[data-theme="dark"] .parallax-text {
-            text-shadow: 0 8px 32px rgba(0,0,0,0.38);
+            text-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
         }
 
         .parallax-btn {
             margin-top: 48px;
             pointer-events: auto;
             opacity: 0;
-            transform: translateX(-200px) scale(1.2); /* 对称于大字 */
+            /* transform: translateX(-200px) scale(1.2); */ /* <- 移除此行 */
             will-change: transform, opacity;
         }
 
@@ -1403,7 +1423,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.6s cubic-bezier(.22,1,.36,1), visibility 0.6s;
+            transition: opacity 0.6s cubic-bezier(.22, 1, .36, 1), visibility 0.6s;
         }
 
         .loader-outer {
@@ -1422,10 +1442,11 @@
             border: 8px solid transparent;
             border-top: 8px solid var(--primary-color, #d6a74b);
             border-right: 8px solid var(--gradient-end, #e2bc6c);
-            box-shadow: 0 0 40px var(--primary-color, #d6a74b), 0 0 0 12px rgba(214,167,75,0.08) inset;
+            box-shadow: 0 0 40px var(--primary-color, #d6a74b), 0 0 0 12px rgba(214, 167, 75, 0.08) inset;
             background: none;
             position: absolute;
-            left: 50%; top: 50%;
+            left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
             animation: loader-spin 1.1s linear infinite;
         }
@@ -1438,35 +1459,40 @@
             letter-spacing: 6px;
             text-shadow: 0 0 12px var(--primary-color, #d6a74b), 0 0 2px #fff;
             position: absolute;
-            left: 50%; top: 50%;
+            left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
             user-select: none;
             pointer-events: none;
             white-space: nowrap;
-            background: rgba(255,255,255,0.10);
+            background: rgba(255, 255, 255, 0.10);
             border-radius: 8px;
             padding: 8px 18px 8px 18px;
-            box-shadow: 0 2px 12px 0 rgba(214,167,75,0.08);
+            box-shadow: 0 2px 12px 0 rgba(214, 167, 75, 0.08);
         }
 
         @keyframes loader-spin {
-            100% { transform: translate(-50%, -50%) rotate(360deg);}
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         /* 黑夜模式适配 */
         [data-theme="dark"] #preloader {
             background: var(--bg-color, #0a0f17);
         }
+
         [data-theme="dark"] .loader-ring {
             border-top: 6px solid var(--primary-color, #64b5f6);
             border-right: 6px solid var(--gradient-end, #2196f3);
-            box-shadow: 0 0 32px var(--primary-color, #64b5f6), 0 0 0 8px rgba(100,181,246,0.08) inset;
+            box-shadow: 0 0 32px var(--primary-color, #64b5f6), 0 0 0 8px rgba(100, 181, 246, 0.08) inset;
         }
+
         [data-theme="dark"] .loader-logo {
             color: var(--primary-color, #64b5f6);
             text-shadow: 0 0 12px var(--primary-color, #64b5f6), 0 0 2px #fff;
-            background: rgba(0,0,0,0.10);
-            box-shadow: 0 2px 12px 0 rgba(100,181,246,0.08);
+            background: rgba(0, 0, 0, 0.10);
+            box-shadow: 0 2px 12px 0 rgba(100, 181, 246, 0.08);
         }
 
         body.loading header,
@@ -1475,20 +1501,20 @@
         body.loading .join-us,
         body.loading footer,
         body.loading .particles,
-        body.loading .cursor-follower
-        {
+        body.loading .cursor-follower {
             opacity: 0 !important;
             pointer-events: none !important;
             transition: none !important;
         }
 
         #preloader.preloader-hide .loader-outer {
-            animation: preloader-zoomout 0.7s cubic-bezier(.22,1,.36,1) forwards;
+            animation: preloader-zoomout 0.7s cubic-bezier(.22, 1, .36, 1) forwards;
         }
+
         #preloader.preloader-hide {
             opacity: 0 !important;
             visibility: hidden !important;
-            transition: opacity 0.7s cubic-bezier(.22,1,.36,1), visibility 0.7s;
+            transition: opacity 0.7s cubic-bezier(.22, 1, .36, 1), visibility 0.7s;
         }
 
         @keyframes preloader-zoomout {
@@ -1496,10 +1522,12 @@
                 transform: scale(1);
                 opacity: 1;
             }
+
             80% {
                 transform: scale(1.5);
                 opacity: 0.7;
             }
+
             100% {
                 transform: scale(2);
                 opacity: 0;
@@ -1512,19 +1540,23 @@
                 gap: 15px;
                 padding: 0 10px;
             }
-            
+
             .team-member {
-                width: 80px; /* 调整为更合适的宽度 */
+                width: 80px;
+                /* 调整为更合适的宽度 */
             }
-            
+
             .member-avatar {
-                width: 80px; /* 与容器宽度一致 */
+                width: 80px;
+                /* 与容器宽度一致 */
                 height: 80px;
-                border-width: 1.5px; /* 减小边框宽度 */
+                border-width: 1.5px;
+                /* 减小边框宽度 */
             }
 
             .member-info {
-                transform: none; /* 移除默认的变换效果 */
+                transform: none;
+                /* 移除默认的变换效果 */
                 margin-top: 8px;
             }
 
@@ -1557,24 +1589,17 @@
             .team-grid {
                 gap: 20px;
             }
-            
+
             .team-member {
                 width: 90px;
             }
-            
+
             .member-avatar {
                 width: 90px;
                 height: 90px;
             }
         }
 
-        // 修复的preloadImage函数，作为备用
-        function preloadImage(url, callback) {
-            const img = new Image();
-            img.onload = callback;
-            img.onerror = callback; // 即使加载失败也继续执行
-            img.src = url;
-        }
 
         .server-status-card {
             margin-top: 30px;
@@ -1582,63 +1607,63 @@
             border-radius: 12px;
             transition: all 0.3s;
         }
-        
+
         [data-theme="dark"] .server-status-card {
             background: linear-gradient(to right, rgba(var(--primary-color-rgb, 100, 181, 246), 0.05), rgba(var(--primary-color-rgb, 100, 181, 246), 0.1), rgba(var(--primary-color-rgb, 100, 181, 246), 0.05));
         }
-        
+
         .server-status-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-top: 20px;
         }
-        
+
         .server-status-item {
             display: flex;
             flex-direction: column;
             text-align: center;
         }
-        
+
         .status-label {
             font-weight: bold;
             margin-bottom: 5px;
             color: var(--primary-color);
         }
-        
+
         .status-value {
             padding: 8px 15px;
             background-color: rgba(var(--primary-color-rgb, 255, 180, 0), 0.1);
             border-radius: 8px;
             border: 1px solid rgba(var(--primary-color-rgb, 255, 180, 0), 0.15);
         }
-        
+
         [data-theme="dark"] .status-value {
             background-color: rgba(17, 26, 36, 0.7);
             border-color: rgba(var(--primary-color-rgb, 100, 181, 246), 0.15);
         }
-        
+
         .server-offline {
             color: #ff5252;
         }
-        
+
         .server-online {
             color: #4caf50;
         }
-        
+
         @media (min-width: 768px) {
             .server-status-item {
                 flex-direction: row;
                 align-items: center;
                 text-align: left;
             }
-            
+
             .status-label {
                 margin-bottom: 0;
                 margin-right: 10px;
                 width: 120px;
             }
-            
+
             .status-value {
                 flex: 1;
             }
@@ -1651,19 +1676,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px; /* 减少下边距 */
+            margin-bottom: 15px;
+            /* 减少下边距 */
             width: 100%;
-            padding-top: 0; /* 移除上边距 */
+            padding-top: 0;
+            /* 移除上边距 */
         }
 
         .server-title-container h3 {
-            margin: 0 0 10px 0; /* 添加底部边距 */
+            margin: 0 0 10px 0;
+            /* 添加底部边距 */
             text-align: center;
             position: relative;
         }
 
         .status-badge {
-            position: static; /* 不再使用绝对定位 */
+            position: static;
+            /* 不再使用绝对定位 */
             font-size: 0.7rem;
             padding: 2px 8px;
             border-radius: 10px;
@@ -1671,7 +1700,8 @@
             border: 1px solid rgba(var(--primary-color-rgb, 255, 180, 0), 0.15);
             white-space: nowrap;
             font-weight: 500;
-            margin-top: 5px; /* 添加顶部边距 */
+            margin-top: 5px;
+            /* 添加顶部边距 */
         }
 
         /* 响应式调整 */
@@ -1679,11 +1709,11 @@
             .server-title-container {
                 margin-bottom: 15px;
             }
-            
+
             .server-title-container h3 {
                 margin-bottom: 8px;
             }
-            
+
             .status-badge {
                 margin-top: 3px;
             }
@@ -1692,9 +1722,12 @@
         /* 调整服务器卡片容器为横向排列 */
         .server-cards-container {
             display: flex;
-            flex-direction: row; /* 强制横向排列 */
-            justify-content: space-between; /* 两端对齐 */
-            gap: 30px; /* 卡片之间的间距 */
+            flex-direction: row;
+            /* 强制横向排列 */
+            justify-content: space-between;
+            /* 两端对齐 */
+            gap: 30px;
+            /* 卡片之间的间距 */
             width: 100%;
             margin-top: 30px;
             margin-bottom: 20px;
@@ -1703,9 +1736,12 @@
         /* 修改服务器卡片样式 */
         .server-status-card {
             margin: 0;
-            width: calc(50% - 15px); /* 每个卡片占据一半宽度减去间距的一半 */
-            min-width: initial; /* 移除最小宽度限制 */
-            max-width: initial; /* 移除最大宽度限制 */
+            width: calc(50% - 15px);
+            /* 每个卡片占据一半宽度减去间距的一半 */
+            min-width: initial;
+            /* 移除最小宽度限制 */
+            max-width: initial;
+            /* 移除最大宽度限制 */
             display: flex;
             flex-direction: column;
             padding: 30px 25px;
@@ -1713,8 +1749,10 @@
             justify-content: space-between;
             box-shadow: 0 5px 15px var(--shadow-color);
             transition: all 0.3s ease;
-            flex-grow: 0; /* 防止卡片伸展 */
-            flex-shrink: 0; /* 防止卡片收缩 */
+            flex-grow: 0;
+            /* 防止卡片伸展 */
+            flex-shrink: 0;
+            /* 防止卡片收缩 */
         }
 
         .server-status-card:hover {
@@ -1725,12 +1763,14 @@
         /* 较小屏幕上的响应式调整 */
         @media (max-width: 768px) {
             .server-cards-container {
-                flex-direction: column; /* 小屏幕上转为纵向 */
+                flex-direction: column;
+                /* 小屏幕上转为纵向 */
                 align-items: center;
             }
-            
+
             .server-status-card {
-                width: 100%; /* 小屏幕上占满宽度 */
+                width: 100%;
+                /* 小屏幕上占满宽度 */
                 margin-bottom: 20px;
             }
         }
@@ -1834,7 +1874,7 @@
             .server-cards-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .server-status-card {
                 margin-bottom: 15px;
             }
@@ -1855,7 +1895,7 @@
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s cubic-bezier(.22,1,.36,1);
+            transition: all 0.3s cubic-bezier(.22, 1, .36, 1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1888,11 +1928,81 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* 新增：渐显模糊动画 */
+        @keyframes blurInAnimation {
+            0% {
+                filter: blur(10px);
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            50% {
+                filter: blur(5px);
+                opacity: 0.5;
+                transform: translateY(-5px);
+            }
+
+            100% {
+                filter: blur(0px);
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blur-in-container {
+            /* 可以添加一些容器样式，例如 display: flex */
+            display: inline-block;
+            /* 或者 flex, 根据需要调整 */
+        }
+
+        .blur-in-element {
+            display: inline-block;
+            /* 确保 span 是块级或行内块级 */
+            opacity: 0;
+            /* 初始状态：透明 */
+            filter: blur(10px);
+            /* 初始状态：模糊 */
+            transform: translateY(30px);
+            /* 初始状态：向下偏移 */
+            will-change: filter, opacity, transform;
+            /* 优化动画性能 */
+        }
+
+        .blur-in-animate .blur-in-element {
+            animation: blurInAnimation 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            /* 应用动画 */
+            /* animation-timing-function 可以根据需要调整，例如 ease-out */
+        }
+
+        .blur-text {
+            display: inline-block;
+            will-change: transform;
+        }
+
+        .blur-text span {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(12px);
+            transform: translateY(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity, filter;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .blur-text.animate span {
+            opacity: 1;
+            filter: none;
+            transform: translateY(0) translateZ(0);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
     <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js"></script>
 </head>
+
 <body class="loading">
     <div id="preloader">
         <div class="loader-outer">
@@ -1924,8 +2034,8 @@
     <section class="hero parallax-hero" id="home">
         <div class="parallax-title-box">
             <div class="parallax-title">
-                <h1 class="parallax-text">MCPOOL</h1>
-                <a href="#join" class="btn parallax-btn">立即加入</a>
+                <h1 class="parallax-text blur-text">MCPOOL</h1>
+                <a href="#join" class="btn parallax-btn blur-text">立即加入</a>
             </div>
         </div>
     </section>
@@ -1977,7 +2087,7 @@
         <div class="container">
             <h2>加入我们</h2>
             <p>我们期待你的加入！在MCPOOL，你将遇到志同道合的玩家，共同创造精彩的minecraft世界。</p>
-            
+
             <div class="join-container">
                 <div class="server-info">QQ群: 771951909</div>
                 <a href="https://qm.qq.com/q/rYvImrEOBi" class="btn">立即加入QQ群</a>
@@ -1988,43 +2098,56 @@
                 <h3>牢玩家们</h3>
                 <div class="players">
                     <div class="player-tooltip" data-tooltip="bestcoldcat">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=2160603562&spec=100" alt="玩家昵称1" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=2160603562&spec=100" alt="玩家昵称1"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="yangge_QAQ">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=180613120&spec=100" alt="玩家昵称2" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=180613120&spec=100" alt="玩家昵称2"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="XD123qwq">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1626116551&spec=100" alt="玩家昵称3" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1626116551&spec=100" alt="玩家昵称3"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="Wuullo">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=2499369381&spec=100" alt="玩家昵称4" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=2499369381&spec=100" alt="玩家昵称4"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="ifoxchen">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3861839271&spec=100" alt="玩家昵称5" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3861839271&spec=100" alt="玩家昵称5"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="Distuerought">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=289193797&spec=100" alt="玩家昵称6" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=289193797&spec=100" alt="玩家昵称6"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="mianzhang">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3379294710&spec=100" alt="玩家昵称7" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3379294710&spec=100" alt="玩家昵称7"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="Lanbowan">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1273326736&spec=100" alt="玩家昵称8" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1273326736&spec=100" alt="玩家昵称8"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="ZhaoShBC">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3536696597&spec=100" alt="玩家昵称9" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=3536696597&spec=100" alt="玩家昵称9"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="WhatTheFackup">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1210327280&spec=100" alt="玩家昵称10" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1210327280&spec=100" alt="玩家昵称10"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="Austin_Xu">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=981076434&spec=100" alt="玩家昵称11" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=981076434&spec=100" alt="玩家昵称11"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="Bit_cat">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1694732568&spec=100" alt="玩家昵称12" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1694732568&spec=100" alt="玩家昵称12"
+                            class="player-avatar">
                     </div>
                     <div class="player-tooltip" data-tooltip="oh_my_pcccccc">
-                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1770133033&spec=100" alt="玩家昵称13" class="player-avatar">
+                        <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1770133033&spec=100" alt="玩家昵称13"
+                            class="player-avatar">
                     </div>
                 </div>
                 <H4>MORE...
@@ -2041,7 +2164,7 @@
                 <p>MCPOOL是一个以公益为理念的我的世界服务器，我们致力于为玩家提供更高的自由度，更棒的游戏体验。<br>服务器采用离线登录，极高的生电支持，最全的插件功能。</p>
                 <p>无论你是红石大神、建筑达人，还是刚刚接触Minecraft的新手，在MCPOOL，都能找到属于自己的乐趣。</p>
             </div>
-            
+
             <!-- 服务器卡片容器 -->
             <div class="server-cards-container">
                 <!-- MCPOOL主服卡片 -->
@@ -2060,7 +2183,7 @@
                         <div id="copy-alert" class="copy-alert">复制成功！</div>
                     </div>
                 </div>
-                
+
                 <!-- 模组服卡片 -->
                 <div class="feature-card server-status-card">
                     <div class="feature-icon">
@@ -2085,9 +2208,9 @@
         <div class="container footer-content">
             <div class="footer-sections">
                 <div class="logo"><span>MC</span><span>POOL</span></div>
-                
+
                 <div class="footer-divider"></div>
-                
+
                 <div class="team-grid">
                     <a class="team-member" target="_blank">
                         <div class="member-avatar">
@@ -2153,14 +2276,14 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="footer-divider"></div>
-                
+
                 <div class="social-links">
                     <a href="https://qm.qq.com/q/yjR8GdrD2M"><i class="fab fa-qq"></i></a>
                     <a href="#"><i class="fab fa-bilibili"></i></a>
                 </div>
-                
+
                 <p class="copyright">© 2025 MCPOOL. 保留所有权利。</p>
             </div>
         </div>
@@ -2192,10 +2315,10 @@
         requestAnimationFrame(raf);
 
         // 将滚动事件监听器绑定到Lenis
-        lenis.on('scroll', throttle(function(e) {
+        lenis.on('scroll', throttle(function (e) {
             handleScroll();
-            parallaxTitleEffect();
-            updateParallaxTarget();
+            // parallaxTitleEffect(); // 确保移除旧的视差效果调用
+            updateScrollAnimationTarget(); // 调用新的滚动动画更新函数
             animateOnScroll();
         }, 100));
 
@@ -2222,63 +2345,63 @@
         // 主题切换功能
         const themeToggle = document.getElementById('theme-toggle');
         const icon = themeToggle.querySelector('i');
-        
+
         // 添加CSS变量的RGB值以供使用
         function updateRootColors() {
             const root = document.documentElement;
             const primaryColor = getComputedStyle(root).getPropertyValue('--primary-color').trim();
             const gradientEnd = getComputedStyle(root).getPropertyValue('--gradient-end').trim();
-            
+
             // 将颜色转换为RGB值
             const primaryRGB = hexToRgb(primaryColor) || '255, 180, 0';
             const gradientEndRGB = hexToRgb(gradientEnd) || '255, 144, 0';
-            
+
             root.style.setProperty('--primary-color-rgb', primaryRGB);
             root.style.setProperty('--gradient-end-rgb', gradientEndRGB);
         }
-        
+
         function hexToRgb(hex) {
-            if(!hex || hex === 'inherit') return null;
-            
+            if (!hex || hex === 'inherit') return null;
+
             // 处理简写 #fff 格式
-            if(hex.length === 4) {
+            if (hex.length === 4) {
                 hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
             }
-            
+
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            if(!result) return null;
-            
+            if (!result) return null;
+
             const r = parseInt(result[1], 16);
             const g = parseInt(result[2], 16);
             const b = parseInt(result[3], 16);
-            
+
             return `${r}, ${g}, ${b}`;
         }
-        
+
         // 检查本地存储中的主题设置
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
-        
+
         // 更新初始颜色的RGB值
         updateRootColors();
-        
+
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             switchTheme(!isDark);
         });
-        
+
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
-                
+
                 // 添加导航活跃状态
                 document.querySelectorAll('nav a').forEach(navLink => {
                     navLink.classList.remove('active');
@@ -2286,15 +2409,15 @@
                 this.classList.add('active');
             });
         });
-        
+
         // 添加滚动动画
         const animateOnScroll = () => {
             const featureCards = document.querySelectorAll('.feature-card');
-            
+
             featureCards.forEach(card => {
                 const cardTop = card.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                
+
                 if (cardTop < windowHeight * 0.8) {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
@@ -2303,21 +2426,21 @@
                     card.style.transform = 'translateY(20px)';
                 }
             });
-            
+
             // 检查当前滚动位置，更新导航活跃状态
             const sections = document.querySelectorAll('section[id]');
             let currentSectionId = '';
-            
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
-                
-                if (window.pageYOffset >= sectionTop - 100 && 
+
+                if (window.pageYOffset >= sectionTop - 100 &&
                     window.pageYOffset < sectionTop + sectionHeight - 100) {
                     currentSectionId = section.getAttribute('id');
                 }
             });
-            
+
             document.querySelectorAll('nav a').forEach(navLink => {
                 navLink.classList.remove('active');
                 if (navLink.getAttribute('href') === `#${currentSectionId}`) {
@@ -2325,16 +2448,16 @@
                 }
             });
         };
-        
+
         // 初始化卡片状态
         document.querySelectorAll('.feature-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
         });
-        
+
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
-        
+
         // 获取第一个链接并设置为活跃
         const firstNavLink = document.querySelector('nav a');
         if (firstNavLink) {
@@ -2345,28 +2468,28 @@
         function createParticles() {
             const particlesContainer = document.querySelector('.particles');
             const particleCount = 40;
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                
+
                 // 随机大小，稍微增大了最大值
                 const size = Math.random() * 6 + 1.5;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                
+
                 // 随机位置，让粒子分布更广
                 particle.style.left = `${Math.random() * 120 - 10}%`;
                 particle.style.top = `${Math.random() * 120}%`;
-                
+
                 // 随机动画延迟，使其看起来更自然
                 particle.style.animationDelay = `${Math.random() * 15}s`;
-                
+
                 // 随机透明度变化
                 if (i % 5 === 0) {
                     particle.style.opacity = '0.22'; // 一些粒子更明显
                 }
-                
+
                 particlesContainer.appendChild(particle);
             }
         }
@@ -2385,7 +2508,7 @@
             element.addEventListener('mouseenter', () => {
                 element.style.transform = 'scale(1.02) rotate(1deg)';
             });
-            
+
             element.addEventListener('mouseleave', () => {
                 element.style.transform = 'scale(1) rotate(0deg)';
             });
@@ -2394,7 +2517,7 @@
         // 修复滚动链接定位与异步平移冲突问题
         function handleScroll() {
             const header = document.querySelector('header');
-            
+
             // 使用 requestAnimationFrame 来避免滚动事件过于频繁触发
             requestAnimationFrame(() => {
                 if (window.scrollY > 50) {
@@ -2408,7 +2531,7 @@
         // 节流函数，限制函数调用频率
         function throttle(func, limit) {
             let inThrottle;
-            return function() {
+            return function () {
                 const args = arguments;
                 const context = this;
                 if (!inThrottle) {
@@ -2426,16 +2549,16 @@
         function initParallax() {
             const hero = document.querySelector('.hero-content');
             let ticking = false;
-            
+
             document.addEventListener('mousemove', (e) => {
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const { clientX, clientY } = e;
                         const { innerWidth, innerHeight } = window;
-                        
+
                         const rotateX = (clientY - innerHeight / 2) * 0.003;
                         const rotateY = (clientX - innerWidth / 2) * 0.003;
-                        
+
                         // 使用 transform3d 来强制启用硬件加速
                         hero.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
                         ticking = false;
@@ -2447,24 +2570,8 @@
 
         initParallax();
 
-        // 视差大字滚动动画
-        function parallaxTitleEffect() {
-            const title = document.querySelector('.parallax-text');
-            if (!title) return;
-            const scrollY = window.scrollY;
-            if (scrollY < window.innerHeight * 0.8) {
-                const progress = Math.min(scrollY / (window.innerHeight * 0.5), 1);
-                title.style.opacity = progress;
-                title.style.transform = `translateX(${200 - 200 * progress}px) scale(${1.2 - 0.2 * progress})`;
-            } else {
-                title.style.opacity = 1;
-                title.style.transform = 'translateX(0) scale(1)';
-            }
-        }
-        window.addEventListener('scroll', parallaxTitleEffect);
-        window.addEventListener('load', parallaxTitleEffect);
-
-        // 视差动画参数
+        // 视差动画参数 - 移除
+        /*
         let textCurrent = { x: 200, opacity: 0, scale: 1.2 };
         let textTarget = { x: 200, opacity: 0, scale: 1.2 };
         let btnCurrent = { x: -200, opacity: 0, scale: 1.2 };
@@ -2511,32 +2618,35 @@
 
             requestAnimationFrame(renderParallax);
         }
+        */
 
-        // 初始化
+        // 初始化 - 移除相关调用
+        /*
         window.addEventListener('scroll', updateParallaxTarget);
         window.addEventListener('load', updateParallaxTarget);
         requestAnimationFrame(renderParallax);
+        */
 
         // 页面加载后触发动画
-        window.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
+        window.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
                 document.querySelector('header').classList.add('header-fadein');
             }, 100); // 延迟100ms更自然
         });
 
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        window.addEventListener('load', function () {
+            setTimeout(function () {
                 const preloader = document.getElementById('preloader');
                 if (preloader) {
                     preloader.classList.add('preloader-hide');
                     // 监听动画结束再移除
                     const loaderOuter = preloader.querySelector('.loader-outer');
                     if (loaderOuter) {
-                        loaderOuter.addEventListener('animationend', function() {
+                        loaderOuter.addEventListener('animationend', function () {
                             preloader.remove();
                             // 让页面内容显示，并触发原有淡入动画
                             document.body.classList.remove('loading');
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 document.querySelector('header').classList.add('header-fadein');
                             }, 50);
                         }, { once: true });
@@ -2544,7 +2654,7 @@
                         // 兜底：如果没找到 loader-outer，直接移除
                         preloader.remove();
                         document.body.classList.remove('loading');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.querySelector('header').classList.add('header-fadein');
                         }, 50);
                     }
@@ -2562,17 +2672,17 @@
             // 1. 标记切换中
             document.body.classList.add('bg-fade-bg');
             document.body.classList.remove('bg-fade-to-dark', 'bg-fade-to-light');
-            
+
             // 添加背景过渡样式
             addBackgroundTransitionStyles();
-            
+
             // 2. 提前预加载背景图片
             const newUrl = toDark
                 ? 'https://img.picui.cn/free/2025/05/01/68124ef89740d.png'
                 : 'https://img.picui.cn/free/2025/05/01/681254deb9326.png';
 
             // 立即开始预加载新背景图片
-            preloadImage(newUrl, function() {
+            preloadImage(newUrl, function () {
                 // 3. 先让after元素做淡入效果
                 requestAnimationFrame(() => {
                     // 立即应用主题切换
@@ -2587,24 +2697,24 @@
                         icon.classList.remove('fa-sun');
                         icon.classList.add('fa-moon');
                     }
-                    
+
                     // 重要：立即应用滤镜效果
                     if (toDark) {
                         document.body.style.setProperty('--bg-filter', 'brightness(0.7) saturate(0.8) contrast(1.2)');
                     } else {
                         document.body.style.setProperty('--bg-filter', 'none');
                     }
-                    
+
                     // 启动背景淡入效果
                     document.body.classList.add(toDark ? 'bg-fade-to-dark' : 'bg-fade-to-light');
-                    
+
                     // 4. 过渡完成后更新底层背景
-                    setTimeout(function() {
+                    setTimeout(function () {
                         // 更新底层背景
                         document.body.style.setProperty('--main-bg', `url('${newUrl}')`);
-                        
+
                         // 5. 过渡完成后清理状态
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.body.classList.remove('bg-fade-bg', 'bg-fade-to-dark', 'bg-fade-to-light');
                             updateRootColors();
                         }, 100);
@@ -2648,18 +2758,18 @@
         function preloadImage(url, callback) {
             const img = new Image();
             let called = false;
-            
+
             // 成功加载
-            img.onload = function() {
+            img.onload = function () {
                 if (!called) {
                     called = true;
                     clearTimeout(timeout);
                     callback();
                 }
             };
-            
+
             // 加载失败也调用回调，保证主题能正常切换
-            img.onerror = function() {
+            img.onerror = function () {
                 console.warn('背景图片加载失败:', url);
                 if (!called) {
                     called = true;
@@ -2667,18 +2777,85 @@
                     callback();
                 }
             };
-            
+
             // 添加加载超时处理
-            const timeout = setTimeout(function() {
+            const timeout = setTimeout(function () {
                 console.warn('背景图片加载超时:', url);
                 if (!called) {
                     called = true;
                     callback();
                 }
             }, 3000); // 3秒超时
-            
+
             img.src = url;
         }
+
+        // 修复的preloadImage函数，作为备用
+        function preloadImage(url, callback) {
+            const img = new Image();
+            img.onload = callback;
+            img.onerror = callback; // 即使加载失败也继续执行
+            img.src = url;
+        }
+
+
+        function renderScrollAnimation() {
+            const text = document.querySelector('.parallax-text');
+            const btn = document.querySelector('.parallax-btn');
+            if (!text || !btn) return;
+
+            const damping = 0.1; // 平滑系数，值越小越平滑但延迟越高
+
+            scrollAnimCurrent.opacity += (scrollAnimTarget.opacity - scrollAnimCurrent.opacity) * damping;
+            scrollAnimCurrent.y += (scrollAnimTarget.y - scrollAnimCurrent.y) * damping;
+
+            // 应用样式 - 对标题和按钮应用相同的效果
+            const transformValue = `translateY($ {
+                    scrollAnimCurrent.y
+                }
+
+                px)`;
+            text.style.opacity = scrollAnimCurrent.opacity;
+            text.style.transform = transformValue;
+            text.style.willChange = 'opacity, transform'; // 优化
+
+            btn.style.opacity = scrollAnimCurrent.opacity;
+            btn.style.transform = transformValue;
+            btn.style.willChange = 'opacity, transform'; // 优化
+
+            requestAnimationFrame(renderScrollAnimation);
+        }
+
+        // 初始化和启动动画
+        window.addEventListener('load', () => {
+            updateScrollAnimationTarget(); // 初始化目标值
+            // 确保初始状态被应用
+            const text = document.querySelector('.parallax-text');
+            const btn = document.querySelector('.parallax-btn');
+
+            if (text) {
+                text.style.opacity = scrollAnimCurrent.opacity;
+
+                text.style.transform = `translateY($ {
+                            scrollAnimCurrent.y
+                        }
+
+                        px)`;
+            }
+
+            if (btn) {
+                btn.style.opacity = scrollAnimCurrent.opacity;
+
+                btn.style.transform = `translateY($ {
+                            scrollAnimCurrent.y
+                        }
+
+                        px)`;
+            }
+
+            requestAnimationFrame(renderScrollAnimation); // 启动渲染循环
+        });
+        // ---------- 结束：滚动控制的渐显动画 ----------
 
         // 添加到现有JavaScript末尾
         // 获取服务器状态
@@ -2688,10 +2865,10 @@
                 .then(data => {
                     const pingElement = document.getElementById('server-ping');
                     const motdElement = document.getElementById('server-motd');
-                    
+
                     // 清除之前的类
                     pingElement.classList.remove('server-offline', 'server-online');
-                    
+
                     // 处理ping数据
                     if (data.ping === null) {
                         pingElement.textContent = '离线';
@@ -2708,17 +2885,17 @@
                     pingElement.classList.add('server-offline');
                 });
         }
-    
-            // 添加模组服状态获取函数
+
+        // 添加模组服状态获取函数
         function fetchModServerStatus() {
             fetch('https://list.mczfw.cn/api/mod.mcpool.net')
                 .then(response => response.json())
                 .then(data => {
                     const pingElement = document.getElementById('server-ping-mod');
-                    
+
                     // 清除之前的类
                     pingElement.classList.remove('server-offline', 'server-online');
-                    
+
                     // 处理ping数据
                     if (data.ping === null) {
                         pingElement.textContent = '离线';
@@ -2735,19 +2912,19 @@
                     pingElement.classList.add('server-offline');
                 });
         }
-        
+
         // 页面加载后获取服务器状态
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function () {
             fetchServerStatus();
             fetchModServerStatus();
-            
+
             // 设置定时刷新服务器状态（每60秒）
             setInterval(fetchServerStatus, 10000);
             setInterval(fetchModServerStatus, 10000)
         });
 
         // 复制IP功能增强
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 主服IP按钮
             const copyButton = document.getElementById('copy-ip-btn');
             // 模组服IP按钮
@@ -2755,7 +2932,7 @@
             // 全局弹窗
             const globalCopyAlert = document.getElementById('global-copy-alert');
             const globalCopyMessage = document.getElementById('global-copy-message');
-            
+
             // 创建通用复制函数
             function copyToClipboard(text, sourceType) {
                 // 创建一个临时textarea元素用于复制
@@ -2765,7 +2942,7 @@
                 textarea.style.opacity = '0';
                 document.body.appendChild(textarea);
                 textarea.select();
-                
+
                 try {
                     // 尝试复制文本
                     const successful = document.execCommand('copy');
@@ -2774,7 +2951,7 @@
                         globalCopyMessage.textContent = `${text} 已复制到剪贴板`;
                         // 显示全局弹窗
                         globalCopyAlert.classList.add('show');
-                        
+
                         // 3秒后隐藏弹窗
                         setTimeout(() => {
                             globalCopyAlert.classList.remove('show');
@@ -2783,26 +2960,175 @@
                 } catch (err) {
                     console.error('复制失败:', err);
                 }
-                
+
                 // 移除临时元素
                 document.body.removeChild(textarea);
             }
-            
+
             // 为MCPOOL主服添加复制功能
             if (copyButton) {
-                copyButton.addEventListener('click', function() {
+                copyButton.addEventListener('click', function () {
                     copyToClipboard('mcpool.net', 'main');
                 });
             }
-            
+
             // 为模组服添加复制功能
             if (copyModButton) {
-                copyModButton.addEventListener('click', function() {
+                copyModButton.addEventListener('click', function () {
                     copyToClipboard('mod.mcpool.net', 'mod');
                 });
             }
         });
+
+        // 新增：渐显模糊动画触发逻辑
+        document.addEventListener('DOMContentLoaded', function () {
+            const delayIncrement = 80; // 每个字符/元素的延迟增量 (ms)
+            const observerOptions = {
+                root: null, // 使用视口作为根
+                rootMargin: '0px',
+                threshold: 0.2 // 元素可见 20% 时触发
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const container = entry.target;
+                        const elements = container.querySelectorAll('.blur-in-element');
+                        let currentDelay = 0;
+
+                        elements.forEach((el, index) => {
+                            // 为标题字符设置交错延迟，按钮整体延迟
+                            if (container.tagName === 'H1') {
+                                el.style.animationDelay = `${currentDelay}ms`;
+                                currentDelay += delayIncrement;
+                            } else {
+                                // 按钮作为一个整体，可以给一个固定的延迟或者接在标题后
+                                const titleElements = document.querySelector('h1.blur-in-container').querySelectorAll('.blur-in-element').length;
+                                el.style.animationDelay = `${titleElements * delayIncrement}ms`;
+                            }
+                        });
+
+                        // 添加类以启动动画
+                        container.classList.add('blur-in-animate');
+
+                        // 动画触发后停止观察该元素
+                        observer.unobserve(container);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // 观察所有需要动画的容器
+            const containersToAnimate = document.querySelectorAll('.blur-in-container');
+            containersToAnimate.forEach(container => {
+                observer.observe(container);
+            });
+        });
+
+        // ---------- 新增：滚动控制的渐显动画 ----------
+        let scrollAnimCurrent = { opacity: 0, y: 30 }; // 初始状态：透明，向下偏移30px
+        let scrollAnimTarget = { opacity: 0, y: 30 };
+
+        function updateScrollAnimationTarget() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const triggerHeight = window.innerHeight * 0.3; // 在滚动到视口高度30%时开始动画
+            const animationDurationHeight = window.innerHeight * 0.8; // 动画持续的滚动距离
+
+            let progress = 0;
+            if (scrollY >= triggerHeight) {
+                progress = Math.min((scrollY - triggerHeight) / animationDurationHeight, 1);
+            }
+
+            scrollAnimTarget.opacity = progress;
+            scrollAnimTarget.y = 30 - 30 * progress; // 从 30px 移动到 0px
+        }
+
+        function renderScrollAnimation() {
+            const text = document.querySelector('.parallax-text');
+            const btn = document.querySelector('.parallax-btn');
+            if (!text || !btn) return;
+
+            const damping = 0.1; // 平滑系数，值越小越平滑但延迟越高
+
+            scrollAnimCurrent.opacity += (scrollAnimTarget.opacity - scrollAnimCurrent.opacity) * damping;
+            scrollAnimCurrent.y += (scrollAnimTarget.y - scrollAnimCurrent.y) * damping;
+
+            // 应用样式 - 对标题和按钮应用相同的效果
+            const transformValue = `translateY(${scrollAnimCurrent.y}px)`;
+            text.style.opacity = scrollAnimCurrent.opacity;
+            text.style.transform = transformValue;
+            text.style.willChange = 'opacity, transform'; // 优化
+
+            btn.style.opacity = scrollAnimCurrent.opacity;
+            btn.style.transform = transformValue;
+            btn.style.willChange = 'opacity, transform'; // 优化
+
+            requestAnimationFrame(renderScrollAnimation);
+        }
+
+        // 初始化和启动动画
+        window.addEventListener('load', () => {
+            updateScrollAnimationTarget(); // 初始化目标值
+            // 确保初始状态被应用
+            const text = document.querySelector('.parallax-text');
+            const btn = document.querySelector('.parallax-btn');
+            if (text) {
+                text.style.opacity = scrollAnimCurrent.opacity;
+                text.style.transform = `translateY(${scrollAnimCurrent.y}px)`;
+            }
+            if (btn) {
+                btn.style.opacity = scrollAnimCurrent.opacity;
+                btn.style.transform = `translateY(${scrollAnimCurrent.y}px)`;
+            }
+            requestAnimationFrame(renderScrollAnimation); // 启动渲染循环
+        });
+        // ---------- 结束：滚动控制的渐显动画 ----------
+
+        // 删除原有的滚动动画相关代码
+        // ---------- 新增：模糊文字动画 ----------
+        function initBlurText() {
+            const blurTexts = document.querySelectorAll('.blur-text');
+            
+            blurTexts.forEach(textElement => {
+                // 将文本内容转换为带span的形式
+                const text = textElement.textContent;
+                textElement.textContent = '';
+                
+                // 为每个字符创建span
+                text.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.style.transitionDelay = `${index * 50}ms`; // 每个字符延迟50ms
+                    textElement.appendChild(span);
+                });
+
+                // 创建Intersection Observer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // 元素进入视口时添加动画类
+                            textElement.classList.add('animate');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.5,
+                    rootMargin: '0px'
+                });
+
+                observer.observe(textElement);
+            });
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            initBlurText();
+        });
+
+        // 移除原有的滚动动画相关代码
+        // ---------- 结束：模糊文字动画 ----------
     </script>
 </body>
-</html>
 
+</html>
