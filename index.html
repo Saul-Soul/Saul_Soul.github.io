@@ -2001,6 +2001,93 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
     <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js"></script>
+    <script>
+        (function() {
+            let isProtected = false;
+            let devToolsAttempts = 0;
+            const maxAttempts = 3;
+
+            // 保护函数
+            function protect() {
+                if (isProtected) return; // 避免重复触发
+                
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    z-index: 999999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-family: sans-serif;
+                    font-size: 20px;
+                    backdrop-filter: blur(10px);
+                `;
+                overlay.textContent = '请勿调试此页面';
+                document.body.appendChild(overlay);
+                
+                document.body.style.filter = 'blur(10px)';
+                document.body.style.pointerEvents = 'none';
+                isProtected = true;
+            }
+
+            // 检测开发者工具
+            function checkDevTools() {
+                const threshold = 160; // 增加阈值，减少误判
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                
+                if (widthThreshold || heightThreshold) {
+                    devToolsAttempts++;
+                    if (devToolsAttempts >= maxAttempts) {
+                        protect();
+                    }
+                } else {
+                    devToolsAttempts = Math.max(0, devToolsAttempts - 1); // 逐渐减少计数
+                }
+            }
+
+            // 使用较低的检查频率
+            setInterval(checkDevTools, 1000);
+
+            // 禁用开发者工具快捷键
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+                    (e.ctrlKey && e.key === 'U')) {
+                    e.preventDefault();
+                    devToolsAttempts++;
+                    if (devToolsAttempts >= maxAttempts) {
+                        protect();
+                    }
+                    return false;
+                }
+            });
+
+            // 禁用右键菜单
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 控制台保护
+            const consoleProps = ['log', 'info', 'warn', 'error', 'debug', 'clear'];
+            consoleProps.forEach(prop => {
+                Object.defineProperty(console, prop, {
+                    get: function() {
+                        return function() {};
+                    }
+                });
+            });
+        })();
+    </script>
 </head>
 
 <body class="loading">
@@ -3118,16 +3205,451 @@
                 });
 
                 observer.observe(textElement);
-            });
-        }
+                });
+            }
 
-        // 页面加载完成后初始化
+            // 页面加载完成后初始化
         window.addEventListener('load', () => {
             initBlurText();
         });
 
         // 移除原有的滚动动画相关代码
         // ---------- 结束：模糊文字动画 ----------
+
+        (function() {
+            // 基础加密函数
+            const _0x2468 = function(str) {
+                return str.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 2)).join('');
+            };
+
+            const _0x8642 = function(str) {
+                return str.split('').map(c => String.fromCharCode(c.charCodeAt(0) - 2)).join('');
+            };
+
+            // 加密字符串
+            const _0x9876 = {
+                'efwUppmt': _0x2468('bcxRmmnq'),
+                'dpotpmf': _0x2468('amlqmjc'),
+                'efcvhhfs': _0x2468('bczseecp')
+            };
+
+            // 禁用右键菜单
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 禁用F12键
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.shiftKey && e.key === 'C') || (e.ctrlKey && e.key === 'U')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // 检测开发者工具
+            let devToolsOpen = false;
+            let warningDisplayed = false;
+            let reloadAttempts = 0;
+            const maxReloadAttempts = 3;
+            const warningDelay = 0; // 1秒延迟
+
+            function handleDevToolsOpen() {
+                if (!warningDisplayed) {
+                    warningDisplayed = true;
+                    
+                    // 创建警告遮罩
+                    const overlay = document.createElement('div');
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.9);
+                        z-index: 999999;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        color: white;
+                        font-family: 'Microsoft YaHei', sans-serif;
+                        backdrop-filter: blur(10px);
+                    `;
+
+                    const message = document.createElement('div');
+                    message.style.cssText = `
+                        text-align: center;
+                        padding: 20px;
+                        font-size: 18px;
+                        max-width: 80%;
+                    `;
+                    message.innerHTML = '请不要尝试调试此页面<br>页面将在3秒后重新加载...';
+
+                    overlay.appendChild(message);
+                    document.body.appendChild(overlay);
+
+                    // 延迟后重新加载
+                setTimeout(() => {
+                        if (reloadAttempts < maxReloadAttempts) {
+                            reloadAttempts++;
+                            warningDisplayed = false;
+                            window.location.reload();
+                        } else {
+                            message.innerHTML = '检测到多次调试尝试<br>请关闭开发者工具后刷新页面';
+                        }
+                    }, warningDelay);
+                }
+            }
+
+            function detectDevTools() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+                
+                if (widthThreshold || heightThreshold) {
+                    if (!devToolsOpen) {
+                        devToolsOpen = true;
+                        handleDevToolsOpen();
+                    }
+                } else {
+                    devToolsOpen = false;
+                    warningDisplayed = false;
+                }
+            }
+
+            // 定期检查
+            setInterval(detectDevTools, 1000);
+
+            // 禁用控制台
+            const _0x1357 = _0x8642(_0x9876.dpotpmf);
+            Object.defineProperty(window, _0x1357, {
+                get: function() {
+                    handleDevToolsOpen();
+                    return {};
+                }
+            });
+
+            // 检测调试器
+            const _0x2468a = _0x8642(_0x9876.efcvhhfs);
+            Object.defineProperty(window, _0x2468a, {
+                get: function() {
+                    return function() {};
+                },
+                set: function() {
+                    handleDevToolsOpen();
+                }
+            });
+
+            // 调试检测
+            function checkDebugger() {
+                const start = new Date();
+                debugger;
+                const end = new Date();
+                if (end - start > 100) {
+                    handleDevToolsOpen();
+                }
+            }
+
+            // 定期执行调试检测
+            setInterval(checkDebugger, 1000);
+
+            // 禁用选择文本
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 禁用复制
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 额外的控制台清理
+            console.clear();
+            console.debug = console.log = console.info = console.error = console.warn = function() {};
+        })();
+
+        // 代码保护
+        (function() {
+            // 基础混淆函数
+            const _0x4c8f = ['innerHTML', 'body', 'documentElement', 'style', 'display', 'none', 'visibility', 'hidden'];
+            const _0x1a3b = function(_0x4c8f, _0x1a3b) {
+                _0x4c8f = _0x4c8f - 0;
+                let _0x2d8e = _0x4c8f[_0x1a3b];
+                return _0x2d8e;
+            };
+
+            // 视图保护
+            (() => {
+                // 禁用查看源代码
+                document.addEventListener('keydown', function(e) {
+                    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                // 禁用右键查看源代码
+                document.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 阻止拖拽和选择
+                document.addEventListener('dragstart', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+
+                document.addEventListener('selectstart', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 禁用开发者工具快捷键
+                document.addEventListener('keydown', function(e) {
+                    // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+                    if (
+                        e.key === 'F12' ||
+                        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))
+                    ) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                // 源代码保护
+                setInterval(() => {
+                    // 检测页面可见性
+                    if (document.hidden || document.msHidden || document.webkitHidden) {
+                        document.body.innerHTML = '';
+                        window.location.reload();
+                    }
+
+                    // 检测开发者工具
+                    if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+                        document.body.innerHTML = '';
+                        window.location.reload();
+                    }
+                }, 1000);
+
+                // 禁用控制台
+                Object.defineProperty(window, 'console', {
+                    get: function() {
+                        return {
+                            log: function() {},
+                            info: function() {},
+                            warn: function() {},
+                            error: function() {},
+                            debug: function() {}
+                        };
+                    }
+                });
+
+                // 添加源代码混淆
+                const _0x5a2d = ['\x63\x6F\x6E\x73\x6F\x6C\x65', '\x64\x65\x62\x75\x67\x67\x65\x72'];
+                (function(_0x2d8e) {
+                    const _0x4c8f = function() {
+                        let _0x1a3b = true;
+                        return function(_0x2d8e, _0x4c8f) {
+                            const _0x5a2d = _0x1a3b ?
+                                function() {
+                                    if (_0x4c8f) {
+                                        const _0x1a3b = _0x4c8f.apply(_0x2d8e, arguments);
+                                        _0x4c8f = null;
+                                        return _0x1a3b;
+                                    }
+                                } :
+                                function() {};
+                            _0x1a3b = false;
+                            return _0x5a2d;
+                        };
+                    }();
+                    (function() {
+                        _0x4c8f(this, function() {
+                            const _0x2d8e = new RegExp('function *\\( *\\)');
+                            const _0x4c8f = new RegExp('\\+\\+ *(?:_0x[a-f0-9]{4,6}|(?:[a-f0-9]{4,6}))+ *', 'i');
+                            const _0x1a3b = _0x2d8e('init');
+                            if (!_0x2d8e.test(_0x1a3b + 'chain') || !_0x4c8f.test(_0x1a3b + 'input')) {
+                                _0x1a3b('0');
+                            } else {
+                                _0x2d8e();
+                            }
+                        })();
+                    })();
+                })();
+
+                // 禁用打印
+                window.addEventListener('keydown', function(e) {
+                    if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) {
+                        e.cancelBubble = true;
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                    }
+                });
+
+                // 禁用保存
+                window.addEventListener('keydown', function(e) {
+                    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+                        e.cancelBubble = true;
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                    }
+                });
+            })();
+        })();
+
+        // 源代码保护
+        (function() {
+            const code = document.documentElement.outerHTML;
+            const encoded = btoa(encodeURIComponent(code));
+            
+            // 清空原始内容
+            document.documentElement.innerHTML = '';
+            
+            // 重建页面
+            const decoder = `
+                (function() {
+                    try {
+                        const decoded = decodeURIComponent(atob('${encoded}'));
+                        document.open();
+                        document.write(decoded);
+                        document.close();
+                        
+                        // 添加额外保护
+                        setInterval(() => {
+                            try {
+                                const isDevToolOpen = /./constructor.constructor('debugger')();
+                            } catch(e) {}
+                        }, 100);
+                        
+                        // 使用eval混淆执行
+                        (function() {
+                            const scripts = document.getElementsByTagName('script');
+                            for(let i = 0; i < scripts.length; i++) {
+                                if(!scripts[i].src && scripts[i].text.indexOf('decoder') === -1) {
+                                    try {
+                                        eval(scripts[i].text);
+                                    } catch(e) {}
+                                }
+                            }
+                        })();
+                    } catch(e) {
+                        location.reload();
+                    }
+                })();
+            `;
+            
+            // 执行解码器
+            const script = document.createElement('script');
+            script.textContent = decoder;
+            document.documentElement.appendChild(script);
+        })();
+
+        // 源代码保护 - 增强版
+        (function() {
+            // 自定义编码函数
+            function customEncode(str) {
+                return btoa(encodeURIComponent(str).split('').map((c, i) => 
+                    String.fromCharCode(c.charCodeAt(0) + ((i % 3) + 1))
+                ).join(''));
+            }
+            
+            // 自定义解码函数
+            function customDecode(str) {
+                return decodeURIComponent(atob(str).split('').map((c, i) => 
+                    String.fromCharCode(c.charCodeAt(0) - ((i % 3) + 1))
+                ).join(''));
+            }
+            
+            // 获取并编码源代码
+            const code = document.documentElement.outerHTML;
+            const encoded = customEncode(code);
+            
+            // 清空原始内容
+            document.documentElement.innerHTML = '';
+            
+            // 创建解码器函数（混淆版本）
+            const decoderFunction = customEncode(`
+                function decode(str) {
+                    return decodeURIComponent(atob(str).split('').map((c, i) => 
+                        String.fromCharCode(c.charCodeAt(0) - ((i % 3) + 1))
+                    ).join(''));
+                }
+            `);
+            
+            // 重建页面的解码器
+            const decoder = `
+                (function() {
+                    try {
+                        // 注入解码函数
+                        eval(decode('${decoderFunction}'));
+                        
+                        // 解码并重建页面
+                        const decoded = decode('${encoded}');
+                        document.open();
+                        document.write(decoded);
+                        document.close();
+                        
+                        // 添加运行时保护
+                        setInterval(() => {
+                            try {
+                                // 检测调试器
+                                const isDevToolOpen = /./constructor.constructor('debugger')();
+                                
+                                // 检测开发者工具
+                                if(window.outerHeight - window.innerHeight > 200 || 
+                                   window.outerWidth - window.innerWidth > 200) {
+                                    document.body.innerHTML = '';
+                                    location.reload();
+                                }
+                                
+                                // 检测断点
+                                const start = performance.now();
+                                debugger;
+                                const end = performance.now();
+                                if(end - start > 100) {
+                                    document.body.innerHTML = '';
+                                    location.reload();
+                                }
+                            } catch(e) {}
+                        }, 100);
+                        
+                        // 混淆执行脚本
+                        (function() {
+                            const scripts = document.getElementsByTagName('script');
+                            for(let i = 0; i < scripts.length; i++) {
+                                if(!scripts[i].src && 
+                                   scripts[i].text.indexOf('decoder') === -1 && 
+                                   scripts[i].text.indexOf('decode') === -1) {
+                                    try {
+                                        const encoded = customEncode(scripts[i].text);
+                                        eval(decode(encoded));
+                                    } catch(e) {}
+                                }
+                            }
+                        })();
+                    } catch(e) {
+                        location.reload();
+                    }
+                })();
+            `;
+            
+            // 注入初始解码函数
+            const initDecoder = `
+                function decode(str) {
+                    return decodeURIComponent(atob(str).split('').map((c, i) => 
+                        String.fromCharCode(c.charCodeAt(0) - ((i % 3) + 1))
+                    ).join(''));
+                }
+            `;
+            
+            // 执行解码器
+            const script = document.createElement('script');
+            script.textContent = initDecoder + decoder;
+            document.documentElement.appendChild(script);
+        })();
     </script>
 </body>
 
